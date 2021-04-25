@@ -1,10 +1,10 @@
-package tom.wehner.marketplace;
+package tom.wehner.advertisementWebapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MarketplaceApplicationTests {
+class AppTests {
 
 	@Test
 	void contextLoads() {

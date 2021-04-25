@@ -1,13 +1,13 @@
-package tom.wehner.marketplace;
+package tom.wehner.advertisementWebapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MarketplaceApplication {
+public class App {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MarketplaceApplication.class, args);
+		SpringApplication.run(App.class, args);
 	}
 
 }
