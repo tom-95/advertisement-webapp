@@ -11,12 +11,12 @@ import java.util.Map;
 public class Controller {
 
     @Autowired
-    Service service;
+    private Service service;
 
     @GetMapping(value="/search", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, String>> getAds(@RequestParam("product") String product, @RequestParam("town") String town) {
+    public ResponseEntity<Map<Long, String>> getAds(@RequestParam("product") String product, @RequestParam("town") String town) {
 
-        Map<String, String> results = service.getSearchResults(product, town);
+        Map<Long, String> results = service.getSearchResults(product, town);
 
         return ResponseEntity.ok(results);
 
@@ -32,10 +32,10 @@ public class Controller {
 
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteAd(@PathVariable("id") String id) {
 
-        service.deleteAd(id);
+        service.deleteAd(Long.parseLong(id));
 
         return ResponseEntity.ok().build();
 

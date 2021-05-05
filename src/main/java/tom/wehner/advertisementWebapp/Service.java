@@ -1,5 +1,6 @@
 package tom.wehner.advertisementWebapp;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,14 +12,16 @@ import java.util.stream.Collectors;
 @Component
 public class Service implements IService{
 
-    List<Ad> allAds = new ArrayList<>();
+    @Autowired
+    private AdRepository adRepository;
 
     @Override
-    public Map<String, String> getSearchResults(String product, String town) {
+    public Map<Long, String> getSearchResults(String product, String town) {
 
         List<Ad> searchResults = new ArrayList<>();
-        searchResults = allAds.stream().filter(x -> x.getTown().equals(town)).filter(x -> x.getTitle().contains(product)).collect(Collectors.toList());
-        Map<String, String> json = new HashMap<>();
+        searchResults = adRepository.findAll().stream().filter(x -> x.getTown().equals(town))
+                .filter(x -> x.getTitle().contains(product)).collect(Collectors.toList());
+        Map<Long, String> json = new HashMap<>();
         searchResults.forEach(x -> json.put(x.getId(), x.getTitle()));
 
         return json;
@@ -34,15 +37,14 @@ public class Service implements IService{
         String contact = data.getContact();
 
         Ad ad = new Ad(title, description, town, contact);
-
-        allAds.add(ad);
+        adRepository.save(ad);
 
     }
 
     @Override
-    public void deleteAd(String id) {
+    public void deleteAd(Long id) {
 
-        allAds.removeIf(x -> x.getId().equals(id));
+        adRepository.deleteById(id);
 
     }
 
