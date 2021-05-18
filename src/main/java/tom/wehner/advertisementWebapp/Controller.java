@@ -1,43 +1,28 @@
 package tom.wehner.advertisementWebapp;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.Map;
-
-@RestController
+@org.springframework.stereotype.Controller
 public class Controller {
 
-    @Autowired
-    private Service service;
+    @GetMapping("/")
+    public String startPage() {
 
-    @GetMapping(value="/search", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<Long, String>> getAds(@RequestParam("product") String product, @RequestParam("town") String town) {
-
-        Map<Long, String> results = service.getSearchResults(product, town);
-
-        return ResponseEntity.ok(results);
+        return "startPage";
 
     }
 
-    @PostMapping(value="/create", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<Void> createAd(@RequestBody Data data) {
+    @GetMapping("/login")
+    public String loginPage() {
 
-        service.createAd(data);
-
-        return ResponseEntity.ok().build();
+        return "login";
 
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteAd(@PathVariable("id") String id) {
+    @GetMapping("/searchResults")
+    public String searchResults() {
 
-        service.deleteAd(Long.parseLong(id));
-
-        return ResponseEntity.ok().build();
+        return "searchResults";
 
     }
 
