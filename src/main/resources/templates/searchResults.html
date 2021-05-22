@@ -2,22 +2,19 @@
 <html th:replace="~{layout :: layout (~{::body})}" lang="en">
 <body>
 <h1>Search Results</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Town</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${ads.isEmpty()}">
-        <td colspan="2">Ihre Suchanfrage ergab leider keine Treffer</td>
-    </tr>
-    <tr th:each="ad : ${ads}">
-        <td><span th:text="${ad.title}">Title</span></td>
-        <td><span th:text="${ad.town}">City</span></td>
-    </tr>
-    </tbody>
-</table>
+
+    <p th:if="${ads.isEmpty()}">
+        Ihre Suchanfrage ergab leider keine Treffer
+    </p>
+    <ol class="list-group list-group-numbered">
+    <p th:each="ad : ${ads}">
+        <li class="list-group-item">
+        <b>
+        <span th:text="${ad.title}">Title</span>
+        </b>
+        <span class="badge bg-primary rounded-pill" th:text="${ad.town}">City</span>
+        </li>
+    </p>
+    </ol>
 </body>
 </html>
