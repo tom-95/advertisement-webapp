@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -34,10 +35,10 @@ public class Controller {
 
     }
 
-    @GetMapping("/login")
-    public String loginPage() {
+    @GetMapping("/myAccount")
+    public String myAccount() {
 
-        return "login";
+        return "myAccount";
 
     }
 
@@ -45,6 +46,17 @@ public class Controller {
     public String searchResults() {
 
         return "searchResults";
+
+    }
+
+    @GetMapping("/showArticle/{id}")
+    public String showArticle(@PathVariable("id") String id, Model model) {
+
+        Ad ad = service.getAdById(Long.parseLong(id));
+
+        model.addAttribute("ad", ad);
+
+        return "advertisement";
 
     }
 

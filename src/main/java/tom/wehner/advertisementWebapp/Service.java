@@ -14,6 +14,14 @@ public class Service implements IService{
     @Autowired
     private AdRepository adRepository;
 
+    public Ad getAdById(Long id) {
+
+        Ad ad = adRepository.getOne(id);
+
+        return ad;
+
+    }
+
     @Override
     public List<Ad> getSearchResults(String product, String town) {
 
