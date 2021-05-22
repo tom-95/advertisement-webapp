@@ -5,6 +5,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @org.springframework.web.bind.annotation.RestController
@@ -16,9 +18,13 @@ public class RestController {
     @GetMapping(value="/search", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<Long, String>> getAds(@RequestParam("product") String product, @RequestParam("town") String town) {
 
-        Map<Long, String> results = service.getSearchResults(product, town);
+        List<Ad> results = service.getSearchResults(product, town);
 
-        return ResponseEntity.ok(results);
+        Map<Long, String> json = new HashMap<>();
+
+        results.forEach(x -> json.put(x.getId(), x.getTitle()));
+
+        return ResponseEntity.ok(json);
 
     }
 

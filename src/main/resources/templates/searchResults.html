@@ -2,14 +2,22 @@
 <html th:replace="~{layout :: layout (~{::body})}" lang="en">
 <body>
 <h1>Search Results</h1>
-<div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-        The current link item
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-    <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-    <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-    <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>
-</div>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Town</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${ads.isEmpty()}">
+        <td colspan="2">Ihre Suchanfrage ergab leider keine Treffer</td>
+    </tr>
+    <tr th:each="ad : ${ads}">
+        <td><span th:text="${ad.title}">Title</span></td>
+        <td><span th:text="${ad.town}">City</span></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

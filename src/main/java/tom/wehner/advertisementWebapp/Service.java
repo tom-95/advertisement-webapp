@@ -15,14 +15,12 @@ public class Service implements IService{
     private AdRepository adRepository;
 
     @Override
-    public Map<Long, String> getSearchResults(String product, String town) {
+    public List<Ad> getSearchResults(String product, String town) {
 
         List<Ad> searchResults = adRepository.findAll().stream().filter(x -> x.getTown().equals(town))
                 .filter(x -> x.getTitle().contains(product)).collect(Collectors.toList());
-        Map<Long, String> json = new HashMap<>();
-        searchResults.forEach(x -> json.put(x.getId(), x.getTitle()));
 
-        return json;
+        return searchResults;
 
     }
 
