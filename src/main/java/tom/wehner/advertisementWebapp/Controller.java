@@ -14,7 +14,9 @@ import java.util.List;
 public class Controller {
 
     @Autowired
-    Service service;
+    private Service service;
+
+    private String city = "berlin";
 
     @GetMapping("/")
     public String startPage() {
@@ -59,9 +61,18 @@ public class Controller {
 
     }
 
+    @GetMapping("/changeCity/{city}")
+    public String changeCity(@PathVariable("city") String city) {
+
+        this.city = city;
+
+        return "startPage";
+
+    }
+
     @ModelAttribute(name = "searchRequest")
     public SearchRequest searchRequest() {
-        return new SearchRequest();
+        return new SearchRequest(city);
     }
 
 }

@@ -3,9 +3,10 @@ package tom.wehner.advertisementWebapp;
 public class SearchRequest {
 
     String term;
-    String town = "berlin";
+    String town;
 
-    public SearchRequest() {
+    public SearchRequest(String city) {
+        town = city;
     }
 
     public String getTerm() {
@@ -20,7 +21,4 @@ public class SearchRequest {
         return town;
     }
 
-    public void setTown(String town) {
-        this.town = town;
-    }
 }
