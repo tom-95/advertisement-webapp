@@ -1,6 +1,8 @@
 package tom.wehner.advertisementWebapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,9 +12,6 @@ import java.util.List;
 
 @org.springframework.stereotype.Controller
 public class Controller {
-
-    @Autowired
-    RestController restController;
 
     @Autowired
     Service service;
@@ -36,7 +35,7 @@ public class Controller {
     }
 
     @GetMapping("/myAccount")
-    public String myAccount() {
+    public String myAccount(@AuthenticationPrincipal OidcUser user) {
 
         return "myAccount";
 
