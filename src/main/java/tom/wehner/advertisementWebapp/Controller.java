@@ -43,13 +43,6 @@ public class Controller {
 
     }
 
-    @GetMapping("/searchResults")
-    public String searchResults() {
-
-        return "searchResults";
-
-    }
-
     @GetMapping("/showArticle/{id}")
     public String showArticle(@PathVariable("id") String id, Model model) {
 
