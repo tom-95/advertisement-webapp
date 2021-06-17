@@ -7,7 +7,7 @@ public interface IService {
 
         List<Ad> getSearchResults(String product, String town);
 
-        void createAd(Data data);
+        void createAd(Data data, String eMail);
 
         void deleteAd(Long id);
 

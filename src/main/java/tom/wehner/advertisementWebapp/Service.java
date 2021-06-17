@@ -22,6 +22,15 @@ public class Service implements IService{
 
     }
 
+    public List<Ad> getAdsByUser(String eMail) {
+
+        List<Ad> ads = adRepository.findAll().stream().filter(x -> x.getEMail().equals(eMail))
+                .collect(Collectors.toList());
+
+        return ads;
+
+    }
+
     @Override
     public List<Ad> getSearchResults(String product, String town) {
 
@@ -33,14 +42,13 @@ public class Service implements IService{
     }
 
     @Override
-    public void createAd(Data data) {
+    public void createAd(Data data, String eMail) {
 
         String title = data.getTitle();
         String description = data.getDescription();
         String town = data.getTown();
-        String contact = data.getContact();
 
-        Ad ad = new Ad(title, description, town, contact);
+        Ad ad = new Ad(title, description, town, eMail);
         adRepository.save(ad);
 
     }

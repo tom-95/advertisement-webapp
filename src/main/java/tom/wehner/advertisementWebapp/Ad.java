@@ -28,18 +28,18 @@ public class Ad {
     private Date date;
 
     @Column(nullable = false)
-    private String contact;
+    private String eMail;
     //Image image;
 
     public Ad() {}
 
-    public Ad(String title, String description, String town, String contact) {
+    public Ad(String title, String description, String town, String eMail) {
 
         date = Date.valueOf(LocalDate.now());
         this.title = title;
         this.description = description;
         this.town = town;
-        this.contact = contact;
+        this.eMail = eMail;
 
     }
 
@@ -51,7 +51,7 @@ public class Ad {
 
     public Date getDate() { return date; }
 
-    public String getContact() { return contact; }
+    public String getEMail() { return eMail; }
 
     public void setId(long id) {
         this.id = id;
@@ -71,8 +71,8 @@ public class Ad {
 
     public void setDate(Date date) {this.date = date;}
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setEMail(String contact) {
+        this.eMail = contact;
     }
 
     public void setId(Long id) {

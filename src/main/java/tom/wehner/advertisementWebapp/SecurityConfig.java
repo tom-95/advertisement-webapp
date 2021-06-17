@@ -25,7 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 ).permitAll()
                 // static resources
                 .antMatchers(
-                        "/css/style.css"
+                        "/css/style.css",
+                        "/js/dynamic.js"
                 ).permitAll()
                 .anyRequest().authenticated()
 
@@ -36,7 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .oauth2Client()
                 .and()
-                .oauth2Login();
+                .oauth2Login()
+                .and()
+                .csrf().disable();
     }
 
 }

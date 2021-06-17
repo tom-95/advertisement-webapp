@@ -5,7 +5,6 @@ public class Data {
     private String title;
     private String description;
     private String town;
-    private String contact;
 
     public String getTitle() {
         return title;
@@ -31,11 +30,4 @@ public class Data {
         this.town = town;
     }
 
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
 }
