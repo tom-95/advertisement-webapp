@@ -6,7 +6,10 @@ app.component('dynamic', {
     <h2>Here are all your ads</h2>
     <div v-if="ads.length === 0">You have no ads</div>
     <div v-else>
-    <p v-for="ad in ads">{{ad.title}}</p>
+    <p v-for="ad in ads">
+    {{ad.title}}
+    <button type="button" @click="delete(ad.id)">Delete this Ad</button>
+    </p>
     </div>
     </div>
     <div>
@@ -33,7 +36,9 @@ app.component('dynamic', {
     methods: {
         getMyAds() {
             axios.get('/myAds')
-                .then(response => (this.ads = response.data))
+                .then(response => (
+                    console.log(response),
+                    this.ads = response.data))
         },
         create() {
             axios.post('/create', {
@@ -49,10 +54,19 @@ app.component('dynamic', {
                 console.log('Could not save ad!');
             });
         },
+        delete(id) {
+            axios.delete('/delete/1') //1 zu Testzwecken
+                .then((response) => {
+                    console.log(response),
+                    this.getMyAds()
+                }, (error) => {
+                    console.log('Could not delete ad!');
+                })
+        }
     },
     mounted: function() {
         this.getMyAds();
     }
-})
+});
 
-app.mount('#dynamic')
+app.mount('#dynamic');

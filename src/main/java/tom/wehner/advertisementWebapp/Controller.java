@@ -16,7 +16,7 @@ public class Controller {
     @Autowired
     private Service service;
 
-    private String city = "berlin";
+    private String city = "Berlin";
 
     @GetMapping("/")
     public String startPage() {
