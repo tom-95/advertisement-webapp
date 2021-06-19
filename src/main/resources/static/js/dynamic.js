@@ -1,9 +1,7 @@
-const app = Vue.createApp({})
-
-app.component('dynamic', {
+export default {
+    props: ['title'],
     template: `
     <div>
-    <h2>Here are all your ads</h2>
     <div v-if="ads.length === 0">You have no ads</div>
     <div v-else>
     <p v-for="ad in ads">
@@ -67,6 +65,4 @@ app.component('dynamic', {
     mounted: function() {
         this.getMyAds();
     }
-});
-
-app.mount('#dynamic');
+};
