@@ -22,6 +22,9 @@ public class Ad {
     private String description;
 
     @Column(nullable = false)
+    private int price;
+
+    @Column(nullable = false)
     private String town;
 
     @Column(name = "Datum", nullable = false)
@@ -33,11 +36,12 @@ public class Ad {
 
     public Ad() {}
 
-    public Ad(String title, String description, String town, String eMail) {
+    public Ad(String title, String description, int price, String town, String eMail) {
 
         date = Date.valueOf(LocalDate.now());
         this.title = title;
         this.description = description;
+        this.price = price;
         this.town = town;
         this.eMail = eMail;
 
@@ -82,5 +86,9 @@ public class Ad {
     public Long getId() {
         return id;
     }
+
+    public int getPrice() { return price; }
+
+    public void setPrice(int price) { this.price = price; }
 
 }

@@ -31,6 +31,7 @@ public class Controller {
         List<Ad> ads = service.getSearchResults(searchRequest.getTerm(), searchRequest.getTown());
 
         model.addAttribute("ads", ads);
+        model.addAttribute("searchRequest", searchRequest);
 
         return "searchResults";
 

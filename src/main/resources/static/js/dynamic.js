@@ -14,6 +14,7 @@ export default {
     <h2>Create new Ad</h2>
     <input v-model="titleField" placeholder="Enter title"><br>
     <textarea v-model="descriptionField" placeholder="add description"></textarea><br>
+    <input v-model="priceField" placeholder="Enter price in €"><br>
     <select v-model="townSelector">
     <option disabled value="">Please select one</option>
     <option>Berlin</option>
@@ -28,6 +29,7 @@ export default {
             ads: [],
             title: '',
             description: '',
+            price: '',
             town: '',
         }
     },
@@ -42,11 +44,13 @@ export default {
             axios.post('/create', {
                 title: this.titleField,
                 description: this.descriptionField,
+                price: this.priceField,
                 town: this.townSelector
             })
                 .then((response) => {
                 this.titleField = '';
                 this.descriptionField = '';
+                this.priceField = '';
                 this.getMyAds();
             }, (error) => {
                 console.log('Could not save ad!');

@@ -46,9 +46,10 @@ public class Service implements IService{
 
         String title = data.getTitle();
         String description = data.getDescription();
+        int price = Integer.valueOf(data.getPrice());
         String town = data.getTown();
 
-        Ad ad = new Ad(title, description, town, eMail);
+        Ad ad = new Ad(title, description, price, town, eMail);
         adRepository.save(ad);
 
     }

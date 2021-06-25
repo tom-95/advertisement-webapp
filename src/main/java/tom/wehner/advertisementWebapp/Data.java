@@ -4,6 +4,7 @@ public class Data {
 
     private String title;
     private String description;
+    private String price;
     private String town;
 
     public String getTitle() {
@@ -29,5 +30,9 @@ public class Data {
     public void setTown(String town) {
         this.town = town;
     }
+
+    public String getPrice() { return price; }
+
+    public void setPrice(String price) { this.price = price; }
 
 }

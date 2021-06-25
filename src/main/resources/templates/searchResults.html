@@ -2,7 +2,7 @@
 <html th:replace="~{layout :: layout (~{::body})}" lang="en">
 <body>
 <h1>Search Results</h1>
-
+<p th:text="${searchRequest.getTerm()} + ' in ' + ${searchRequest.getTown()}"></p>
 <p th:if="${ads.isEmpty()}">
     Ihre Suchanfrage ergab leider keine Treffer
 </p>
