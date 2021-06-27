@@ -3,10 +3,7 @@ package tom.wehner.advertisementWebapp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -34,9 +31,12 @@ public class Service implements IService{
 
     public Ad getNewestAd() {
 
-        long newestId = adRepository.findAll().stream().map(x -> x.getId()).max(Comparator.naturalOrder()).get();
+        Optional<Long> newestId = adRepository.findAll().stream().map(x -> x.getId()).max(Comparator.naturalOrder());
 
-        Ad newestAd = adRepository.getOne(newestId);
+        if (newestId.isEmpty())
+            return null;
+
+        Ad newestAd = adRepository.getOne(newestId.get());
 
         return newestAd;
 

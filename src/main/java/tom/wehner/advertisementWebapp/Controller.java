@@ -1,8 +1,6 @@
 package tom.wehner.advertisementWebapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +21,9 @@ public class Controller {
 
         Ad ad = service.getNewestAd();
 
+        if (ad == null)
+            return "emptyStartPage";
+
         model.addAttribute("ad", ad);
 
         return "startPage";
@@ -42,7 +43,7 @@ public class Controller {
     }
 
     @GetMapping("/myAccount")
-    public String myAccount(@AuthenticationPrincipal OidcUser user) {
+    public String myAccount() {
 
         return "myAccount";
 
