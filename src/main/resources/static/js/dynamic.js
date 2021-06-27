@@ -26,16 +26,14 @@ export default {
     <option>Hamburg</option>
     <option>München</option>
     </select><br>
+    <input type="file" @change="selectedFile"><br>
     <button type="button" @click="create()">Create Ad</button>
     </div>
     `,
     data() {
         return {
             ads: [],
-            title: '',
-            description: '',
-            price: '',
-            town: '',
+            file: null
         }
     },
     methods: {
@@ -46,12 +44,13 @@ export default {
                         this.ads = response.data))
         },
         create() {
-            axios.post('/create', {
-                title: this.titleField,
-                description: this.descriptionField,
-                price: this.priceField,
-                town: this.townSelector
-            })
+            const formData = new FormData();
+            formData.append("title", this.titleField),
+                formData.append("description", this.descriptionField),
+                formData.append("price", this.priceField),
+                formData.append("town", this.townSelector),
+            formData.append("image", this.file, this.file.name)
+            axios.post('/create', formData)
                 .then((response) => {
                     this.titleField = '';
                     this.descriptionField = '';
@@ -69,6 +68,9 @@ export default {
                 }, (error) => {
                     console.log('Could not delete ad!');
                 })
+        },
+        selectedFile(newFile) {
+            this.file = newFile.target.files[0]
         }
     },
     mounted: function() {

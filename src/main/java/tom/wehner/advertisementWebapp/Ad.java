@@ -1,9 +1,6 @@
 package tom.wehner.advertisementWebapp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -32,11 +29,14 @@ public class Ad {
 
     @Column(nullable = false)
     private String eMail;
-    //Image image;
+
+    @Lob
+    @Column(nullable = false)
+    private byte[] image;
 
     public Ad() {}
 
-    public Ad(String title, String description, int price, String town, String eMail) {
+    public Ad(String title, String description, int price, String town, String eMail, byte[] image) {
 
         date = Date.valueOf(LocalDate.now());
         this.title = title;
@@ -44,6 +44,7 @@ public class Ad {
         this.price = price;
         this.town = town;
         this.eMail = eMail;
+        this.image = image;
 
     }
 
@@ -91,4 +92,7 @@ public class Ad {
 
     public void setPrice(int price) { this.price = price; }
 
+    public byte[] getImage() { return image; }
+
+    public void setImage(byte[] image) { this.image = image; }
 }

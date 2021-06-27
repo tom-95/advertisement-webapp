@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,19 +18,6 @@ public class RestController {
 
     @Autowired
     private Service service;
-
-    @GetMapping(value="/search", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<Long, String>> getAds(@RequestParam("product") String product, @RequestParam("town") String town) {
-
-        List<Ad> results = service.getSearchResults(product, town);
-
-        Map<Long, String> json = new HashMap<>();
-
-        results.forEach(x -> json.put(x.getId(), x.getTitle()));
-
-        return ResponseEntity.ok(json);
-
-    }
 
     @GetMapping(value="/myAds", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Ad>> getMyAds(@AuthenticationPrincipal OidcUser user) {
@@ -43,11 +32,14 @@ public class RestController {
 
     }
 
-    @PostMapping(value="/create", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<Void> createAd(@AuthenticationPrincipal OidcUser user, @RequestBody Data data) {
+    @PostMapping(value="/create")
+    public ResponseEntity<Void> createAd(@AuthenticationPrincipal OidcUser user, @RequestPart("title") String title,
+                                         @RequestPart("description") String description, @RequestPart("price") String price,
+                                         @RequestPart("town") String town, @RequestPart("image") MultipartFile image) throws IOException {
 
-        service.createAd(data, user.getEmail());
+        byte[] img = image.getBytes();
+
+        service.createAd(title, description, price, town, user.getEmail(), img);
 
         return ResponseEntity.ok().build();
 

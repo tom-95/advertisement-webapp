@@ -24,7 +24,7 @@ public class Controller {
         if (ad == null)
             return "emptyStartPage";
 
-        model.addAttribute("ad", ad);
+        model.addAttribute("ad", new ConvertedAd(ad));
 
         return "startPage";
 
@@ -54,16 +54,25 @@ public class Controller {
 
         Ad ad = service.getAdById(Long.parseLong(id));
 
-        model.addAttribute("ad", ad);
+        ConvertedAd convertedAd = new ConvertedAd(ad);
+
+        model.addAttribute("ad", convertedAd);
 
         return "advertisement";
 
     }
 
     @GetMapping("/changeCity/{city}")
-    public String changeCity(@PathVariable("city") String city) {
+    public String changeCity(Model model, @PathVariable("city") String city) {
 
         this.city = city;
+
+        Ad ad = service.getNewestAd();
+
+        if (ad == null)
+            return "emptyStartPage";
+
+        model.addAttribute("ad", new ConvertedAd(ad));
 
         return "startPage";
 

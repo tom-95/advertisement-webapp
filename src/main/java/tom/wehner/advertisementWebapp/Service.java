@@ -12,6 +12,7 @@ public class Service implements IService{
     @Autowired
     private AdRepository adRepository;
 
+    @Override
     public Ad getAdById(Long id) {
 
         Ad ad = adRepository.getOne(id);
@@ -20,6 +21,7 @@ public class Service implements IService{
 
     }
 
+    @Override
     public List<Ad> getAdsByUser(String eMail) {
 
         List<Ad> ads = adRepository.findAll().stream().filter(x -> x.getEMail().equals(eMail))
@@ -29,6 +31,7 @@ public class Service implements IService{
 
     }
 
+    @Override
     public Ad getNewestAd() {
 
         Optional<Long> newestId = adRepository.findAll().stream().map(x -> x.getId()).max(Comparator.naturalOrder());
@@ -53,14 +56,9 @@ public class Service implements IService{
     }
 
     @Override
-    public void createAd(Data data, String eMail) {
+    public void createAd(String title, String description, String price, String town, String eMail, byte[] img) {
 
-        String title = data.getTitle();
-        String description = data.getDescription();
-        int price = Integer.valueOf(data.getPrice());
-        String town = data.getTown();
-
-        Ad ad = new Ad(title, description, price, town, eMail);
+        Ad ad = new Ad(title, description, Integer.valueOf(price), town, eMail, img);
         adRepository.save(ad);
 
     }
