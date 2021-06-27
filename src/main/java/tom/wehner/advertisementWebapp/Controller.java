@@ -19,7 +19,11 @@ public class Controller {
     private String city = "Berlin";
 
     @GetMapping("/")
-    public String startPage() {
+    public String startPage(Model model) {
+
+        Ad ad = service.getNewestAd();
+
+        model.addAttribute("ad", ad);
 
         return "startPage";
 

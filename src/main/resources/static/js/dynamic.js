@@ -1,14 +1,19 @@
 export default {
-    props: ['title'],
+    props: ['header'],
     template: `
-    <div>
-    <div v-if="ads.length === 0">You have no ads</div>
-    <div v-else>
-    <p v-for="ad in ads">
-    {{ad.title}}
-    <button type="button" @click="delete(ad.id)">Delete this Ad</button>
-    </p>
-    </div>
+     <div>
+      <h4> {{ header }} </h4>
+      <div v-if="ads.length === 0">You have no ads</div>
+        <div v-else>
+        <table>
+          <tbody>
+          <tr v-for="ad in ads">
+            <td>{{ad.title}}</td>
+            <td><button type="button" @click="deleteAd(ad.id)">Delete</button></td>
+          </tr>
+          </tbody>
+        </table>
+        </div>
     </div>
     <div>
     <h2>Create new Ad</h2>
@@ -38,7 +43,7 @@ export default {
             axios.get('/myAds')
                 .then(response => (
                     console.log(response),
-                    this.ads = response.data))
+                        this.ads = response.data))
         },
         create() {
             axios.post('/create', {
@@ -48,19 +53,19 @@ export default {
                 town: this.townSelector
             })
                 .then((response) => {
-                this.titleField = '';
-                this.descriptionField = '';
-                this.priceField = '';
-                this.getMyAds();
-            }, (error) => {
-                console.log('Could not save ad!');
-            });
+                    this.titleField = '';
+                    this.descriptionField = '';
+                    this.priceField = '';
+                    this.getMyAds();
+                }, (error) => {
+                    console.log('Could not save ad!');
+                });
         },
-        delete(id) {
-            axios.delete('/delete/1') //1 zu Testzwecken
+        deleteAd(id) {
+            axios.delete('/delete/' + id)
                 .then((response) => {
                     console.log(response),
-                    this.getMyAds()
+                        this.getMyAds()
                 }, (error) => {
                     console.log('Could not delete ad!');
                 })
