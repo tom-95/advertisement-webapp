@@ -15,7 +15,7 @@ public class Ad {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "varchar(512)")
     private String description;
 
     @Column(nullable = false)
