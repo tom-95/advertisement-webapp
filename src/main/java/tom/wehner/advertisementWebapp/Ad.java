@@ -84,9 +84,7 @@ public class Ad {
         this.id = id;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
 
     public int getPrice() { return price; }
 

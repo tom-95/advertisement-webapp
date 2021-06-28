@@ -1,7 +1,6 @@
 package tom.wehner.advertisementWebapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
@@ -9,9 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @org.springframework.web.bind.annotation.RestController
 public class RestController {
@@ -19,16 +16,12 @@ public class RestController {
     @Autowired
     private Service service;
 
-    @GetMapping(value="/myAds", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, Ad>> getMyAds(@AuthenticationPrincipal OidcUser user) {
+    @GetMapping(value="/myAds")
+    public ResponseEntity<List<Ad>> getMyAds(@AuthenticationPrincipal OidcUser user) {
 
         List<Ad> results = service.getAdsByUser(user.getEmail());
 
-        Map<String, Ad> json = new HashMap<>();
-
-        results.forEach(x -> json.put(x.getId().toString(), x));
-
-        return ResponseEntity.ok(json);
+        return ResponseEntity.ok(results);
 
     }
 

@@ -54,4 +54,5 @@ class ServiceTest {
         Assertions.assertEquals(1, searchResults.size());
         Assertions.assertEquals("Bike", searchResults.get(0).getTitle());
     }
+
 }

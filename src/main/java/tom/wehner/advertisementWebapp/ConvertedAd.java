@@ -53,9 +53,7 @@ public class ConvertedAd {
         return town;
     }
 
-    public Date getDate() {
-        return date;
-    }
+    public Date getDate() { return date; }
 
     public String geteMail() {
         return eMail;

@@ -1,6 +1,7 @@
 export default {
     props: ['header'],
     template: `
+    <br>
      <div>
       <h4> {{ header }} </h4>
       <div v-if="ads.length === 0">You have no ads</div>
@@ -16,18 +17,19 @@ export default {
         </div>
     </div>
     <div>
+    <br>
     <h2>Create new Ad</h2>
-    <input v-model="titleField" placeholder="Enter title"><br>
-    <textarea v-model="descriptionField" placeholder="add description"></textarea><br>
-    <input v-model="priceField" placeholder="Enter price in €"><br>
-    <select v-model="townSelector">
-    <option disabled value="">Please select one</option>
+    <p><input v-model="titleField" placeholder="Enter title"></p>
+    <p><textarea v-model="descriptionField" placeholder="add description"></textarea></p>
+    <p><input v-model="priceField" placeholder="Enter price in €"></p>
+    <p><select v-model="townSelector">
+    <option disabled value="">Please select town</option>
     <option>Berlin</option>
     <option>Hamburg</option>
     <option>München</option>
-    </select><br>
-    <input type="file" @change="selectedFile"><br>
-    <button type="button" @click="create()">Create Ad</button>
+    </select></p>
+    <p><input type="file" @change="selectedFile"></p>
+    <p><button type="button" @click="create()">Create Ad</button></p>
     </div>
     `,
     data() {
