@@ -20,7 +20,7 @@ class ServiceTest {
     @MockBean
     AdRepository repository;
 
-    @Test
+    /*@Test
     @DisplayName("should return ads of the user")
     void getAdsByUser() {
         Ad ad1 = new Ad();
@@ -34,7 +34,7 @@ class ServiceTest {
 
         Assertions.assertEquals(1, johnsAds.size());
         Assertions.assertEquals("Bike", johnsAds.get(0).getTitle());
-    }
+    }*/
 
     @Test
     @DisplayName("should return the right search results")

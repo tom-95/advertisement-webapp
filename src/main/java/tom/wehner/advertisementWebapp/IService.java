@@ -6,13 +6,13 @@ public interface IService {
 
         Ad getAdById(Long id);
 
-        List<Ad> getAdsByUser(String eMail);
+        List<Ad> getAdsByUser();
 
         Ad getNewestAd();
 
         List<Ad> getSearchResults(String product, String town);
 
-        void createAd(String title, String description, String price, String town, String eMail, byte[] img);
+        void createAd(String title, String description, String price, String town, byte[] img);
 
         void deleteAd(Long id);
 

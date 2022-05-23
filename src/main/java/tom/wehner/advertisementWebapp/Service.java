@@ -1,6 +1,8 @@
 package tom.wehner.advertisementWebapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import tom.wehner.advertisementWebapp.security.*;
 
@@ -27,9 +29,12 @@ public class Service implements IService {
     }
 
     @Override
-    public List<Ad> getAdsByUser(String eMail) {
+    public List<Ad> getAdsByUser() {
 
-        List<Ad> ads = adRepository.findAll().stream().filter(x -> x.getEMail().equals(eMail))
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mail = authentication.getName();
+
+        List<Ad> ads = adRepository.findAll().stream().filter(x -> x.getEMail().equals(mail))
                 .collect(Collectors.toList());
 
         return ads;
@@ -61,9 +66,12 @@ public class Service implements IService {
     }
 
     @Override
-    public void createAd(String title, String description, String price, String town, String eMail, byte[] img) {
+    public void createAd(String title, String description, String price, String town, byte[] img) {
 
-        Ad ad = new Ad(title, description, Integer.valueOf(price), town, eMail, img);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String mail = authentication.getName();
+
+        Ad ad = new Ad(title, description, Integer.valueOf(price), town, mail, img);
         adRepository.save(ad);
 
     }
