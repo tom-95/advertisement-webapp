@@ -2,9 +2,7 @@ package tom.wehner.advertisementWebapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +26,16 @@ public class Controller {
 
         return "startPage";
 
+    }
+
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
     }
 
     @GetMapping("/getArticles")
@@ -78,9 +86,24 @@ public class Controller {
 
     }
 
+    @PostMapping("/createAccount")
+    public String createAccount(@ModelAttribute SimpleUser simpleUser) {
+
+        if (service.createUser(simpleUser) == true)
+            return "login";
+        else
+            return "register";
+
+    }
+
     @ModelAttribute(name = "searchRequest")
     public SearchRequest searchRequest() {
         return new SearchRequest(city);
+    }
+
+    @ModelAttribute(name = "simpleUser")
+    public SimpleUser simpleUser() {
+        return new SimpleUser();
     }
 
 }

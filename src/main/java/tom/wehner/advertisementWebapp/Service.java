@@ -2,15 +2,20 @@ package tom.wehner.advertisementWebapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import tom.wehner.advertisementWebapp.security.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
-public class Service implements IService{
+public class Service implements IService {
 
     @Autowired
     private AdRepository adRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PasswordConfig passwordConfig;
 
     @Override
     public Ad getAdById(Long id) {
@@ -68,6 +73,18 @@ public class Service implements IService{
 
         adRepository.deleteById(id);
 
+    }
+
+    @Override
+    public boolean createUser(SimpleUser simpleUser) {
+
+        User user = new User();
+        user.setUsername(simpleUser.getUsername());
+        user.setPassword(passwordConfig.passwordEncoder().encode(simpleUser.getPassword()));
+
+        userRepository.save(user);
+
+        return true;
     }
 
 }

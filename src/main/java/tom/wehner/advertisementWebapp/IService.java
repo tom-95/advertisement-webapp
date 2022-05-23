@@ -16,4 +16,6 @@ public interface IService {
 
         void deleteAd(Long id);
 
+        boolean createUser(SimpleUser simpleUser);
+
 }
