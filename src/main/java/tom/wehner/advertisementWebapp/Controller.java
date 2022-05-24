@@ -30,8 +30,14 @@ public class Controller {
     }
 
     @GetMapping("/register")
-    public String register() {
+    public String register(Model model) {
+
+        boolean failed = false;
+
+        model.addAttribute(failed);
+
         return "register";
+
     }
 
     @GetMapping("/login")
@@ -88,12 +94,19 @@ public class Controller {
     }
 
     @PostMapping("/createAccount")
-    public String createAccount(@ModelAttribute UserData userData) {
+    public String createAccount(@ModelAttribute UserData userData, Model model) {
 
         if (service.createUser(userData) == true)
             return "login";
-        else
+        else {
+
+            boolean failed = true;
+
+            model.addAttribute(failed);
+
             return "register";
+
+        }
 
     }
 
