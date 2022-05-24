@@ -116,7 +116,7 @@ public class Controller {
     }
 
     @ModelAttribute(name = "userData")
-    public UserData simpleUser() {
+    public UserData userData() {
         return new UserData();
     }
 
