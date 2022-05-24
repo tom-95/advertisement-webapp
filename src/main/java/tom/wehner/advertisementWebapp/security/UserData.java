@@ -1,6 +1,6 @@
-package tom.wehner.advertisementWebapp;
+package tom.wehner.advertisementWebapp.security;
 
-public class SimpleUser {
+public class UserData {
 
     private String username;
     private String password;

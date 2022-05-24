@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout (~{::body})}" lang="en">
 <body>
+<p style="text-align:right"><a class="button" th:href="@{/logout}">Logout</a></p>
 <h1>My Account</h1>
 <div id="app">
     <dynamic header="Here are all your ads:"></dynamic>
 </div>
-<a class="button" th:href="@{/logout}">Logout</a>
 </body>
 </html>

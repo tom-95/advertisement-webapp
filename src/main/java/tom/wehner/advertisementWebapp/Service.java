@@ -84,11 +84,19 @@ public class Service implements IService {
     }
 
     @Override
-    public boolean createUser(SimpleUser simpleUser) {
+    public boolean createUser(UserData userData) {
+
+        if (!(userData.getUsername().contains("@")) || !(userData.getUsername().contains(".")))
+            return false;
+
+        List<User> allUsers = userRepository.findAll();
+        for (User user : allUsers)
+            if (user.getUsername().equals(userData.getUsername()))
+                return false;
 
         User user = new User();
-        user.setUsername(simpleUser.getUsername());
-        user.setPassword(passwordConfig.passwordEncoder().encode(simpleUser.getPassword()));
+        user.setUsername(userData.getUsername());
+        user.setPassword(passwordConfig.passwordEncoder().encode(userData.getPassword()));
 
         userRepository.save(user);
 

@@ -61,10 +61,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
 
                 .and()
-//                .oauth2Client()
-//                .and()
-//                .oauth2Login()
-//                .and()
                 .csrf().disable();
     }
 

@@ -1,5 +1,7 @@
 package tom.wehner.advertisementWebapp;
 
+import tom.wehner.advertisementWebapp.security.UserData;
+
 import java.util.List;
 
 public interface IService {
@@ -16,6 +18,6 @@ public interface IService {
 
         void deleteAd(Long id);
 
-        boolean createUser(SimpleUser simpleUser);
+        boolean createUser(UserData userData);
 
 }

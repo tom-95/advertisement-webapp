@@ -3,6 +3,7 @@ package tom.wehner.advertisementWebapp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import tom.wehner.advertisementWebapp.security.UserData;
 
 import java.util.List;
 
@@ -87,9 +88,9 @@ public class Controller {
     }
 
     @PostMapping("/createAccount")
-    public String createAccount(@ModelAttribute SimpleUser simpleUser) {
+    public String createAccount(@ModelAttribute UserData userData) {
 
-        if (service.createUser(simpleUser) == true)
+        if (service.createUser(userData) == true)
             return "login";
         else
             return "register";
@@ -101,9 +102,9 @@ public class Controller {
         return new SearchRequest(city);
     }
 
-    @ModelAttribute(name = "simpleUser")
-    public SimpleUser simpleUser() {
-        return new SimpleUser();
+    @ModelAttribute(name = "userData")
+    public UserData simpleUser() {
+        return new UserData();
     }
 
 }
